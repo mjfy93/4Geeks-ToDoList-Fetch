@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { fetchData, addTasks, deleteTask } from '../Utils/ApiFetch.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 export function ToDoFetch() {
     const [tasks, setTasks] = useState([]);
@@ -22,6 +24,7 @@ export function ToDoFetch() {
     function changes(event) {
         const newText = event.target.value;
         setText(newText);
+
     }
     async function newTask() {
         const updated = await addTasks(text);
@@ -31,7 +34,7 @@ export function ToDoFetch() {
         await deleteTask(event.target.id);
         setTasks(prev => prev.filter(element => element.id != event.target.id))
     }
-    async function deleteAll(event){
+    async function deleteAll(event) {
         tasks.forEach(element => deleteTask(element.id))
         setTasks([]);
     }
@@ -39,20 +42,24 @@ export function ToDoFetch() {
 
     return (
         <>
-            <h1>To Do List</h1>
-            <input type="text" placeholder='Add tasks here' onChange={changes} onKeyDown={(e) => {
-                if (e.key == "Enter") {
-                    newTask();
-                }
-            }} />
-            <div id='buttons'>
-                <button onClick={newTask}>Add Tasks</button>
-                <button onClick={deleteAll}>Delete All</button>
+            <div id='header'>
+                <h1>To Do List - MJFY93</h1>
+                <div id='inputContainer'>
+                    <input type="text" placeholder='Add tasks here' onChange={changes} onKeyDown={(e) => {
+                        if (e.key == "Enter") {
+                            newTask();
+                        }
+                    }} /><button onClick={newTask}>Add Tasks</button>
+                </div>
+                <button onClick={deleteAll} id='deleteButton'>Delete All</button>
             </div>
 
-            <ul>
+            <ul className="list-group  d-grid m-0 ">
                 {tasks.map((element, index) => (
-                    <li key={index}><input type="checkbox"/><span>{element.label}</span><button id={element.id} onClick={delTask}>X</button></li>
+                    <li className="list-group-item d-flex justify-content-between m-0 border border-0 p-2" key={index} >
+                        <input type="checkbox" /><span>{element.label}</span>
+                        <button id={element.id} onClick={delTask}>X</button>
+                    </li>
                 ))}
 
             </ul>
