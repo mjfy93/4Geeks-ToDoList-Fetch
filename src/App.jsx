@@ -1,6 +1,6 @@
-import './App.css'
-import {ToDoList} from './Components/ToDoList'
 
+import {ToDoFetch} from './Components/ToDoFetch.jsx'
+import "./App.css"
 function App(){
 
   
