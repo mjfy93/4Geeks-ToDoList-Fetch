@@ -51,7 +51,7 @@ export function ToDoFetch() {
                         }
                     }} /><button onClick={newTask}>Add Tasks</button>
                 </div>
-                <button onClick={deleteAll} id='deleteButton'>Delete All</button>
+                
             </div>
 
             <ul className="list-group  d-grid m-0 ">
@@ -60,9 +60,11 @@ export function ToDoFetch() {
                         <input type="checkbox" /><span>{element.label}</span>
                         <button id={element.id} onClick={delTask}>X</button>
                     </li>
+                    
                 ))}
 
             </ul>
+            <button onClick={deleteAll} id='deleteButton'>Delete All</button>
         </>
     )
 }
